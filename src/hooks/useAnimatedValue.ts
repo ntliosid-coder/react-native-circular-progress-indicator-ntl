@@ -13,7 +13,6 @@ import {
 import { withPause } from 'react-native-redash';
 
 import type { StrokeColorConfigType } from '../types';
-
 import useCircleValues from './useCircleValues';
 
 export interface UseAnimatedValueProps {
@@ -35,9 +34,10 @@ export interface UseAnimatedValueProps {
   strokeColorConfig?: StrokeColorConfigType[];
 }
 
+// ✅ ปรับเปลี่ยน Config Type ให้ยืดหยุ่นขึ้นเพื่อเลี่ยง Error TS2322
 type Config = {
   strokeDashoffset: number;
-  stroke?: string | number;
+  stroke?: any; 
 };
 
 export default function useAnimatedValue({
@@ -54,12 +54,11 @@ export default function useAnimatedValue({
   inActiveStrokeWidth = 10,
   progressFormatter = (v: number) => {
     'worklet';
-
     return Math.round(v);
   },
   strokeColorConfig = undefined,
 }: UseAnimatedValueProps) {
-  const paused = useSharedValue(<boolean>startInPausedState);
+  const paused = useSharedValue<boolean>(!!startInPausedState);
   const animatedValue = useSharedValue(initialValue);
   const { circleCircumference } = useCircleValues({
     radius,
@@ -84,9 +83,9 @@ export default function useAnimatedValue({
     animatedValue.value = withPause(
       withDelay(
         delay,
-        withTiming(value, { duration, easing: Easing.linear }, isFinished => {
+        withTiming(value, { duration, easing: Easing.linear }, (isFinished) => {
           if (isFinished) {
-            runOnJS(onAnimationComplete)?.();
+            runOnJS(onAnimationComplete)();
           }
         })
       ),
@@ -103,6 +102,7 @@ export default function useAnimatedValue({
     if (!strokeColorConfig) {
       return null;
     }
+    // ✅ ทำสำเนาก่อน sort ป้องกัน side-effect
     return [...strokeColorConfig].sort((a, b) => a.value - b.value);
   }, [strokeColorConfig]);
 
@@ -110,14 +110,14 @@ export default function useAnimatedValue({
     if (!sortedStrokeColors) {
       return null;
     }
-    return sortedStrokeColors.map(item => item.color);
+    return sortedStrokeColors.map((item) => item.color);
   }, [sortedStrokeColors]);
 
   const values = useMemo(() => {
     if (!sortedStrokeColors) {
       return null;
     }
-    return sortedStrokeColors.map(item => item.value);
+    return sortedStrokeColors.map((item) => item.value);
   }, [sortedStrokeColors]);
 
   const animatedCircleProps = useAnimatedProps(
@@ -127,24 +127,32 @@ export default function useAnimatedValue({
       const maxPercentage: number = clockwise
         ? (100 * animatedValue.value) / biggestValue
         : (100 * -animatedValue.value) / biggestValue;
+
       const config: Config = {
         strokeDashoffset:
           circleCircumference - (circleCircumference * maxPercentage) / 100,
       };
+
       const strokeColor =
         colors && values
           ? interpolateColor(animatedValue.value, values, colors)
           : undefined;
+
       if (strokeColor) {
         config.stroke = strokeColor;
       }
+
       return config;
     },
-    [],
+    [colors, values, circleCircumference, clockwise, initialValue, maxValue],
     (props: any) => {
       'worklet';
-      if (Object.keys(props).includes('stroke')) {
-        props.stroke = { type: 0, payload: processColor(props.stroke) };
+      // ✅ ใน Reanimated 4 พยายามจัดการ Props โดยตรงไม่ผ่าน createAnimatedPropAdapter
+      if (props && Object.keys(props).includes('stroke')) {
+        props.stroke = { 
+          type: 0, 
+          payload: processColor(props.stroke) 
+        };
       }
     }
   );

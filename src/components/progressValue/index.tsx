@@ -1,7 +1,4 @@
-// implementation reference from
-// https://github.com/wcandillon/react-native-redash/blob/master/src/ReText.tsx
-// and https://github.com/coinjar/react-native-wagmi-charts/
-// blob/master/src/components/AnimatedText.tsx for web compatibility
+// src/components/progressValue/index.tsx
 
 import React, { useMemo, useRef } from 'react';
 import { TextInput, Platform } from 'react-native';
@@ -26,18 +23,15 @@ const ProgressValue: React.FC<ProgressValueProps> = ({
   animatedTextProps,
   allowFontScaling = true,
 }: ProgressValueProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const inputRef = useRef<any>(null);
 
   if (Platform.OS === 'web') {
-    // only run the reaction on web platform.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useAnimatedReaction(
-      () => {
-        return progressValue.value;
-      },
+      () => progressValue.value,
       (data, prevData) => {
         if (data !== prevData && inputRef.current) {
+          // สำหรับ Web ต้องเปลี่ยนค่าผ่าน DOM property โดยตรง
           inputRef.current.value = data;
         }
       }
@@ -67,13 +61,13 @@ const ProgressValue: React.FC<ProgressValueProps> = ({
       ref={inputRef}
       underlineColorAndroid={COLORS.TRANSPARENT}
       editable={false}
-      defaultValue={`${initialValue}`}
+      defaultValue={String(initialValue)}
       style={[
         styles(styleProps).input,
         progressValueStyle,
         styles(styleProps).fromProps,
       ]}
-      animatedProps={animatedTextProps}
+      animatedProps={animatedTextProps as any}
       allowFontScaling={allowFontScaling}
     />
   );

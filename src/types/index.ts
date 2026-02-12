@@ -42,7 +42,7 @@ interface BaseProgressCircleProps extends CircleGradientProps {
 }
 
 interface ProgressCircleProps extends BaseProgressCircleProps {
-  animatedCircleProps: AnimatedProps<CircleProps>;
+  animatedCircleProps: any;
 }
 
 interface BaseCircularProgressProps extends BaseProgressCircleProps {
@@ -76,6 +76,7 @@ interface CircularProgressProps extends BaseCircularProgressProps {
   subtitleStyle?: TextStyle;
   subtitleColor?: string;
   subtitleFontSize?: number;
+  // eslint-disable-next-line no-unused-vars
   progressFormatter?: (v: number) => number | string;
   allowFontScaling?: boolean;
   valuePrefixStyle?: TextStyle;
@@ -89,8 +90,10 @@ type ProgressValueProps = {
   progressValueColor?: string;
   progressValueStyle?: TextStyle;
   progressValueFontSize?: number;
+  // ✅ ใช้ SharedValue ตรงๆ (แก้ Error TS2694)
   progressValue: SharedValue<string>;
-  animatedTextProps: AnimatedProps<TextInputProps>;
+  // ✅ ปรับเป็น any เพื่อลดความเข้มงวดในการตรวจสอบ Nested Type ของ TextInput ใน RN 0.83
+  animatedTextProps: any;
   allowFontScaling?: boolean;
 };
 

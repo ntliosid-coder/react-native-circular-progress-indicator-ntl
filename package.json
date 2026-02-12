@@ -71,7 +71,7 @@
     "targets": [
       "commonjs",
       "module",
-      "typescript"
+      "typescript" 
     ]
   },
   "dependencies": {
