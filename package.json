@@ -23,7 +23,7 @@
   "repository": {
     "name": "GitHub",
     "type": "git",
-    "url": "git+https://github.com/nithinpp69/react-native-circular-progress-indicator.git"
+    "url": "git+https://github.com/ntliosid-coder/react-native-circular-progress-indicator-ntl"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
@@ -31,12 +31,9 @@
     "react-native-reanimated": ">=2.2.0",
     "react-native-svg": ">=12.1.1"
   },
-  "author": "Nithin P P <nithinpp69@gmail.com>",
+  "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/nithinpp69/react-native-circular-progress-indicator/issues"
-  },
-  "homepage": "https://github.com/nithinpp69/react-native-circular-progress-indicator.git",
+  "homepage": "https://github.com/ntliosid-coder/react-native-circular-progress-indicator-ntl",
   "devDependencies": {
     "@babel/core": "^7.18.5",
     "@babel/preset-env": "^7.10.2",
