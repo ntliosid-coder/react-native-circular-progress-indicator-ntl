@@ -1,8 +1,9 @@
-
-{
-  "extends": "./tsconfig",
-  "exclude": [
-    "src/**/*.test.ts",
-    "src/**/*.test.tsx"
+"react-native-builder-bob": {
+  "source": "src",
+  "output": "lib",
+  "targets": [
+    "commonjs",
+    "module",
+    "typescript" 
   ]
 }
