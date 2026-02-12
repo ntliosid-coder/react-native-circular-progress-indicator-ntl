@@ -18,7 +18,7 @@
     "tsc": "tsc",
     "ci": "yarn lint && yarn tsc",
     "build": "bob build",
-    "prepare": "yarn build && husky install"
+    "prepare": "bob build --targets commonjs,module"
   },
   "repository": {
     "name": "GitHub",
