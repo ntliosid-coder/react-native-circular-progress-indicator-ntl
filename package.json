@@ -1,7 +1,7 @@
 {
   "name": "react-native-circular-progress-indicator-ntl",
   "version": "1.0.0",
-  "description": "React Native customizable circular progress indicator",
+  "description": "Customized Circular Progress Indicator for NTL Insurance",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -9,41 +9,38 @@
   "files": [
     "src",
     "lib",
-    "!**/__tests__"
+    "package.json"
   ],
   "scripts": {
     "test": "jest --forceExit",
     "lint": "eslint --ext .ts,.tsx . --max-warnings 0",
     "lint:fix": "eslint --ext .ts,.tsx . --fix",
     "tsc": "tsc",
-    "ci": "yarn lint && yarn tsc",
     "build": "bob build",
-    "prepare": "bob build --targets commonjs,module"
+    "prepare": "bob build"
   },
   "repository": {
-    "name": "GitHub",
     "type": "git",
-    "url": "git+https://github.com/ntliosid-coder/react-native-circular-progress-indicator-ntl"
+    "url": "git+https://github.com/ntliosid-coder/react-native-circular-progress-indicator-ntl.git"
   },
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-native": ">=0.59.0",
-    "react-native-reanimated": ">=2.2.0",
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0",
+    "react-native-reanimated": ">=3.0.0",
     "react-native-svg": ">=12.1.1"
   },
-  "author": "",
+  "author": "NTL Coder",
   "license": "MIT",
-  "homepage": "https://github.com/ntliosid-coder/react-native-circular-progress-indicator-ntl",
   "devDependencies": {
-    "@babel/core": "7.29.0",
-    "@babel/preset-env": "7.29.0",
-    "@babel/preset-react": "7.28.5",
-    "@babel/runtime": "7.28.6",
-    "@react-native-community/eslint-config": "3.2.0",
-    "@testing-library/react-native": "13.3.3",
-    "@types/jest": "29.5.14",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/runtime": "^7.25.6",
+    "@react-native-community/eslint-config": "^3.4.1",
+    "@testing-library/react-native": "^12.4.0",
+    "@types/jest": "^29.5.12",
     "@types/react": "^19.0.0",
-    "@types/react-native": "0.72.8",
+    "@types/react-native": "^0.73.0",
     "@types/react-test-renderer": "^19.0.0",
     "babel-jest": "^29.7.0",
     "babel-plugin-module-resolver": "^5.0.0",
@@ -60,69 +57,22 @@
     "react-native-builder-bob": "^0.30.0",
     "react-native-gesture-handler": "^2.30.0",
     "react-native-reanimated": "4.2.1",
-    "react-native-svg": "^15.15.2",
-    "react-test-renderer": "19.2.0",
-    "typescript": "^5.8.3"
+    "react-native-svg": "^15.6.0",
+    "react-test-renderer": "19.0.0",
+    "typescript": "^5.5.4"
   },
   "resolutions": {
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0"
   },
-  "keywords": [
-    "react-native",
-    "react",
-    "native",
-    "animated",
-    "reanimated",
-    "chart",
-    "ui",
-    "animated-chart",
-    "progress-indicator",
-    "animated-progress-indicator",
-    "animated-progress-bar",
-    "circular-progress-bar",
-    "circular-progress",
-    "circular-progress-indicator",
-    "mobile",
-    "android",
-    "ios"
-  ],
   "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
     "targets": [
       "commonjs",
       "module",
-      [
-        "typescript",
-        {
-          "project": "tsconfig.build.json"
-        }
-      ]
+      "typescript"
     ]
-  },
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ],
-    "testEnvironment": "node",
-    "clearMocks": true,
-    "setupFilesAfterEnv": [
-      "<rootDir>/jest.setup.js"
-    ],
-    "setupFiles": [
-      "<rootDir>/jest.setup.js"
-    ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>/lib/"
-    ],
-    "transformIgnorePatterns": []
   },
   "dependencies": {
     "react-native-redash": "*"
